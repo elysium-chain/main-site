@@ -1,18 +1,14 @@
 {
-  "name": "elysium-main-site",
+  "name": "genesis_site",
   "version": "0.1.0",
-  "description": "Elysium Main Site",
-  "main": "src/index.imba",
+  "description": "Genesis Main Site frontend",
+  "main": "index.imba",
   "scripts": {
-    "dev": "imba serve src/index.imba",
-    "deploy": "imba build --esm --web --minify --no-sourcemap --production --bundle --base . src/index.html && firebase deploy",
-    "build": "imba build --esm --web --base . src/index.html",
-    "preview": "npx http-server dist",
-    "help": "imba build --help"
+    "dev": "imba serve src/index.imba"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elysium-chain/main-site.git"
+    "url": "git+https://github.com/genesis-block-chain/site.git"
   },
   "keywords": [
     "site",
@@ -21,10 +17,10 @@
   "author": "HeapVoid and 0p0int",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/elysium-chain/main-site/issues"
+    "url": "https://github.com/genesis-block-chain/site/issues"
   },
-  "homepage": "http://elysium-chain.com/",
+  "homepage": "https://github.com/genesis-block-chain/site#readme",
   "devDependencies": {
-    "imba": "^2.0.0-alpha.225"
+    "imba": "^2.0.0-alpha.223"
   }
 }

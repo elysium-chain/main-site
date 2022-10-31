@@ -1,0 +1,17 @@
+@font-face {
+	font-family: 'Playfair';
+	font-weight: 100 900;
+	src: url('./fonts/Playfair.ttf');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-weight: 100 900;
+	src: url("./fonts/Montserrat.ttf");
+}
+
+@font-face {
+	font-family: 'Anonymous';
+	font-weight: normal;
+	src: url("./fonts/Anonymous-Regular.ttf");
+}
