@@ -76,12 +76,11 @@ css .rainbow
 		text-fill-color: transparent
 
 css svg
-		d: block
-		fill: #FFF
-		stroke: none
-		stroke-linejoin: round
-		m: 0
-		p: 0
+	d: block
+	stroke: none
+	stroke-linejoin: round
+	m: 0
+	p: 0
 
 css .img-container
 	d: flex jc: center ai: center
@@ -102,6 +101,7 @@ css .img-container
 		filter: brightness(1.2) saturate(1.2)
 
 tag Link
+	prop icon
 	prop url
 	prop first
 	prop second
@@ -111,11 +111,12 @@ tag Link
 		a
 			cursor: pointer
 			d: flex ai: center g: 32px
-			p: 0 m: 0 mt: 24px
+			p: 0 m: 0
 			fs: 20px lh: 32px fw: 600 c: white td: none
 			.icon
 				pos: relative
 				s: 64px
+				min-width: 64px
 				rd: 100%
 				of: hidden
 				.medium
@@ -143,7 +144,7 @@ tag Link
 		<self>
 			<a href=url target="_blank">
 				<.icon>
-					<Medium.medium>
+					<{icon}.medium>
 					<svg viewBox="0 0 64 64">
 						<circle cx="50%" cy="50%" r="30px" stroke="url(#rainbow)">
 				first
@@ -301,13 +302,14 @@ tag Intro
 						min-width: 300px @!380: 300px
 						t: 48%
 					.slogan
+						w: 100%
 						d: flex jc: center
 						pos: relative
-						fs: 10px lh: 16px fw: 500 ls: 1em tt: uppercase
+						fs: 10px lh: 20px fw: 500 ls: 1em tt: uppercase ta: center
 						&:before
 							content: 'New world that shines'
 							pos: absolute
-							fs: 12px lh: 16px fw: 500 ls: 0.8em tt: uppercase ws: nowrap
+							fs: 12px lh: 20px fw: 500 ls: 0.8em tt: uppercase ta: center
 							mix-blend-mode: soft-light
 							filter: blur(1px)
 				.logo
@@ -507,7 +509,7 @@ tag Contracts
 					rd: 100%
 					bg: rgba(255, 255, 255, 0.05)
 			ol
-				of: hidden
+				of: scroll
 				m: 0 p: 16px 40px 20px 58px
 				list-style-type: none
 				counter-reset: num
@@ -601,7 +603,7 @@ tag Contracts
 
 tag Tokenomics
 	def render
-		<self>
+		<self[mt: -100px]>
 			<.section>
 				<.img-container>
 					<video loop autoplay muted poster='./images/coins.webp'>
@@ -612,67 +614,43 @@ tag Tokenomics
 						'of '
 						<span.rainbow> 'two tokens'
 					<p> 'There will be two system tokens on the Elysium network. The first (operational) token is an algorithmic stablecoin, the rate of which will be regulated by burning fees / emission as a reward to network participants. The second (investment) token will accumulate profit in itself with the active growth of the network.'
-					<Link url='https://link.medium.com/kpot7j5ZJub' first='Learn more about' second='Elysium Tokenomics'>
+					<Link icon=Medium url='https://link.medium.com/kpot7j5ZJub' first='Learn more about' second='Elysium Tokenomics'>
 
-tag Footer
-	css self
-		w: 100%
-		p: 40px 0
-		border-width: 2px
-		border-style: solid
-		border-image: linear-gradient(to right, #4E01FF, #FE039B) 1 0 0 0
-		.section
-			jc: space-between
-			ai: center
-			a m: 0
-			p fs: 16px
-			.copyright
-				d: flex g: 24px ai: center
-				img h: 56px
-			.social
-				js: end
-				d: flex g: 40px
-				>>> svg fill: white h: 20px
-
-	def render
-		<self>
-			<.section>
-				<.copyright>
-					<img src="./images/Colorize_Logo.png">
-					<p> '© 2022. Elysium, true dezentralized blockchain.'
-				<.social>
-					<a><Discord>
-					<a><Twitter>
-					<a><Medium>
-
-tag Social
-
-	css .socials
-		# w: 100%
-		d: grid
-		gtc: repeat(auto-fit, minmax(240px, 1fr))
-		g: 40px
-		jc: center
-		>>> svg
-			s: 32px
-			fill: white
-		.social
-			d: flex fld: column ai: center
+tag Outro
+	css .copyright
+		ta: center
+		p: 40px
+		fs: 16px fw: 500 o: .5
+	css .bg-container
+		d: flex fld: column
+		g: 48px @!640: 32px
+		p: 80px @!640: 40px
+		# bg: linear-gradient(to top right, rgba(255,255,255,0), rgba(255,255,255,.05))
+		bw: 1px
+		bs: solid
+		border-image: linear-gradient(to right top, #4E01FF, #FE039B) 1 1 1 1
+		backdrop-filter: blur(10px)
+		.grid
+			d: grid
+			gtc: repeat(auto-fit, minmax(240px, 1fr))
+			g: 64px 120px @!640: 40px
+			.socials
+				order: 3
+				d: flex fld: column g: 22px
 
 	def render
 		<self>
 			<.section>
-				<.content>
-					<.socials>
-						<.social>
-							<Discord>
-							<p> 'Join us on Discord'
-						<.social>
-							<Twitter>
-							<p> 'Follow us on Twitter'
-						<.social>
-							<Medium>
-							<p> 'Read us on Medium'
+				<.bg-container>
+					<.grid>
+						<.content>
+							<h2> 'To be continued...'
+							<p> "And there will be something else really grandiose... But we will tell about it closer to the launch of the mainnet. Follow us on social networks so you don't miss anything."
+						<.socials>
+							<Link icon=Discord url='https://discord.gg/Ykp5mCXWZ3' first='Join us on Discord'>
+							<Link icon=Twitter url='https://twitter.com/elysium_chain' first='Follow us on Twitter'>
+							<Link icon=Medium url='https://medium.com/@heap.void' first='Read us on Medium'>
+			<.copyright> '© 2022. Elysium, true dezentralized blockchain.'
 
 tag Page
 	css self
@@ -693,7 +671,6 @@ tag Page
 			<Wallet>
 			<Contracts>
 			<Tokenomics>
-			<Quote first="And there will be something really big..." second="But we'll tell you about it closer to the launch.">
-			<Footer>
+			<Outro>
 
 imba.mount <Page>
