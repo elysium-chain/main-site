@@ -249,37 +249,10 @@ tag Quote
 						second
 
 tag Intro
-	pages = [
-		{caption: 'Intro', url: ''},
-		{caption: 'Consensus', url: ''},
-		{caption: 'Nodes', url: ''},
-		{caption: 'Scalability', url: ''}
-		{caption: 'Wallet', url: ''}
-		{caption: 'Smart contracts', url: ''}
-		{caption: 'Tokenomics', url: ''}
-		{caption: 'Pioneer Program', url: ''}
-	]
-
 	css self
 		pos: relative
 		d: flex fld: column ac: center
 		ta: center @!640: left
-		.header
-			zi: 1000
-			pos: fixed l: 0 r: 0 m: auto
-			bg: rgba(0,0,0,.1)
-			backdrop-filter: blur(10px)
-			.navigation
-				d: flex g: 64px
-				jc: center
-				>>> svg
-					h: 32px
-					fill: #fff
-				.mirror
-					transform: scaleX(-1)
-				a
-					fs: 12px fw: 600 ls: 0.5px tt: uppercase
-					m: 24px 0
 		.media
 			zi: 0
 			pos: relative
@@ -289,7 +262,7 @@ tag Intro
 				zi: 1
 				content: ''
 				pos: absolute l: 0 t: 0 r: 0 b: 0
-				bg: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 30%) # url('./images/noise.webp'),
+				bg: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 30%)
 			.logo-name
 				pos: absolute ai: center
 				d: flex fld: column jc: center g: 64px
@@ -329,14 +302,8 @@ tag Intro
 				w: 100%
 				min-width: 1600px
 				object-fit: cover
-				# filter: brightness(1.2) saturate(1.1)
 	def render
 		<self>
-			# <.header>
-			# 	<.navigation>
-			# 		for page, id in pages
-			# 			<a> 
-			# 				page.caption
 			<.media>
 				<.logo-name>
 					<.logo>
@@ -460,10 +427,72 @@ tag Scalability
 				<video src=chain autoplay muted loop poster='./images/scalability.webp'>
 
 tag Wallet
+	prop close-notify
+
+	css .notify
+		zi: 100
+		pos: absolute
+		t: 0 l: 0
+		d: flex g: 24px ai: center
+		p: 20px
+		rd: 24px
+		bd: 1px solid rgba(255,255,255,.05)
+		bg: rgba(255,255,255,.05)
+		backdrop-filter: blur(10px)
+		o: 1
+		transform: scale(1)
+		tween: ease 0.2s
+		&.hidden
+			o: 0
+			transform: scale(0.85)
+		.close
+			cursor: pointer
+			d: flex ai: center jc: center
+			pos: absolute
+			l: -10px t: -10px
+			s: 24px
+			rd: 100%
+			bd: 1px solid rgba(255,255,255,.05)
+			bg: rgba(11,11,11,1)
+			bxs: 0 4px 12px 0 rgba(0,0,0,1)
+			&:hover
+				>>> svg
+					transform: rotateZ(90deg)
+					tween: ease 0.2s
+			>>> svg
+				s: 10px
+				stroke: rgba(55,55,55)
+				stroke-width: 2px
+				stroke-linecap: round
+				transform: rotateZ(0deg)
+		img
+			s: 64px rd: 12px
+		.msg
+			max-width: 240px
+			d: flex fld: column g: 4px
+			p
+				fs: 14px fw: 500 lh: 20px
+				&:first-child
+					fw: 700 o: 1
+					span
+						fs: 12px fw: 500 o: .5
+						float: right
+
+
 	def render
 		<self[mt: -100px]>
 			<.section>
 				<.img-container>
+					<.notify.hidden=(close-notify == false)>
+						<.close @click=(do close-notify = false)>
+							<svg viewBox="0 0 10 10">
+								<line x1="1px" y1="1px" x2="9px" y2="9px">
+								<line x1="9px" y1="1px" x2="1px" y2="9px">
+						<img src='./images/social-logo.png'>
+						<.msg>
+							<p> 'ATTENTION!'
+								<span> '5 sec ago'
+							<p> 'Your passphrase has been added on a new device.'
 					<video loop autoplay muted poster='./images/wallet.webp'>
 						<source src=wallet type='video/webm; codecs="vp9, vorbis"'>
 				<.content>
