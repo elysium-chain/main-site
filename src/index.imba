@@ -461,7 +461,7 @@ tag Scalability
 
 tag Wallet
 	def render
-		<self>
+		<self[mt: -100px]>
 			<.section>
 				<.img-container>
 					<video loop autoplay muted poster='./images/wallet.webp'>
@@ -603,7 +603,7 @@ tag Contracts
 
 tag Tokenomics
 	def render
-		<self[mt: -100px]>
+		<self>
 			<.section>
 				<.img-container>
 					<video loop autoplay muted poster='./images/coins.webp'>
@@ -668,9 +668,9 @@ tag Page
 			<Consensus>
 			<Nodes>
 			<Scalability>
-			<Wallet>
-			<Contracts>
 			<Tokenomics>
+			<Contracts>
+			<Wallet>
 			<Outro>
 
 imba.mount <Page>
