@@ -83,17 +83,24 @@ css svg
 	p: 0
 
 css .img-container
-	d: flex jc: center ai: center
+	d: flex jc: center as: start
 	pos: relative
 	@!880 order: 1
 	# &:before
 	# 	content: ''
-	# 	pos: absolute
-	# 	s: 200%
-	# 	bg: linear-gradient(-135deg, #FE039A 1%, #4E01FF 98%)
+	# 	pos: absolute l: -50px b: -50px
+	# 	s: 400px
+	# 	bg: #FE039A
 	# 	rd: 100%
-	# 	filter: blur(100px)
-	# 	o: .11
+	# 	o: .05
+	# &:after
+	# 	content: ''
+	# 	pos: absolute r: 0 t: 0
+	# 	s: 200px
+	# 	bg: #4E01FF
+	# 	# bg: linear-gradient(-135deg, #FE039A 1%, #4E01FF 98%)
+	# 	rd: 100%
+	# 	o: .05
 	video
 		zi:1
 		w: 100%
@@ -250,7 +257,6 @@ tag Quote
 
 tag Intro
 	css self
-		pos: relative
 		d: flex fld: column ac: center
 		ta: center @!640: left
 		.media
@@ -318,13 +324,20 @@ tag Intro
 				<.content>
 					<h2[max-width: 800px as: center]> 
 						<span.rainbow> "Elysium"
-						" is the "
-						<span.rainbow> "next round"
-						" of blockchain development in its "
-						<span.rainbow> "evolutionary spiral."
-					<p[max-width: 800px as: center]> "Current blockchains, even of the latest generation, bring little innovation, and in many cases go completely away from the fundamental principles on which the first breakthrough projects such as Bitcoin and Etherium were built."
+						" is a "
+						<span.rainbow> "next-generation"
+						" blockchain with a many "
+						<span.rainbow> "social"
+						" and "
+						<span.rainbow> "tech"
+						" innovations."
+					<p[max-width: 800px as: center]> "Current blockchains, even those of the latest generation, do not bring much innovation. In many cases, they move away from the fundamental principles of the first breakthrough projects, such as Bitcoin and Ethereum."
 
 tag Consensus
+	css em
+		pos: -webkit-sticky
+		pos: sticky
+		t: 10px
 	def render
 		<self>
 			<.section>
@@ -333,13 +346,12 @@ tag Consensus
 				<.content>
 					<h2> 'Consensus '
 						<.rainbow> 'Proof of Victory'
-					<p> 'Despite the fact that our consensus algorithm, albeit to a small extent, still loses in security to the Proof of Work algorithm, it does not have such disadvantages as power consumption (PoW) and centralization and limited scalability (PoS).'
+					<p> 'Whereas Proof of Work consensus ensures randomness by the unpredictability of the answer to the problem solved by all the miners, in our Proof of Victory consensus, the validator in advance predicts the result of a function processing third-party input data. This approach completely removes the need for heavy calculations. Based on Game Theory, Proof of Victory consensus is, by its logic, a lighter and faster successor of Proof of Work.'
 					<em>
 						<Lightning>
-						<p> 'In addition, our consensus allows not only validators and routers, but also ordinary participants in the blockchain to make money on network security.'
+						<p> 'The Proof of Victory consensus does not imply money investments to become a validator.'
 
 tag Nodes
-
 	css .bg-container
 		d: flex fld: column
 		g: 48px @!640: 32px
@@ -356,9 +368,11 @@ tag Nodes
 			g: 64px 120px @!640: 40px
 
 		.node-list
+			mt: 15px
 			order: 3
 			d: grid
-			gtc: repeat(auto-fit, minmax(200px, 1fr))
+			gtc: repeat(auto-fit, minmax(240px, 1fr))
+			ac: start
 			g: 64px 80px @!640: 40px
 			p fs: 16px lh: 28px
 			.node
@@ -372,18 +386,18 @@ tag Nodes
 						<.content>
 							<h2> 'Two types'
 								<br>
-								'of chain nodes'
-							<p> 'Blockchain nodes solve two difficult tasks: communicating with each other and reaching consensus. In all existing networks, there is only one type of nodes to solve these two problems. Elysium provides two different types of nodes for each of the tasks.'
+								'of blockchain nodes'
+							<p> 'Blockchain nodes solve two complex tasks: communicating with each other and achieving consensus. All existing networks have only one type of node for these two tasks. In Elysium, there are two node types for each of these duties.'
 						<.node-list>
 							<.node>
 								<h3.rainbow> 'Router'
-								<p> 'Validators are responsible for consensus, and routers are responsible for communication. Validators are responsible for consensus'
+								<p> 'Designed to create a Single Address Space that will allow you to run a validator node even on a regular home computer behind network firewall.'
 							<.node>
 								<h3.rainbow> 'Validator'
-								<p> 'Validators are responsible for consensus, and routers are responsible for communication. Validators are responsible for consensus Validators are responsible for consensus'
+								<p> 'Responsible for creating blocks of verified client transactions and reaching a consensus on canonical history of different financial instruments.'
 					<em>
 						<Lightning>
-						<p> 'This approach allows you to run the validator node even on a regular home computer.'
+						<p> "A Single Address Space helps validators to process different financial instruments independently."
 
 tag Scalability
 	css self
@@ -409,6 +423,7 @@ tag Scalability
 				pos: absolute l: 0 t: 0 r: 0 b: 0
 				bg: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 30%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 30%) # url('./images/noise.webp'),
 			video
+				pos: relative
 				w: 100%
 				min-width: 1200px
 				o: .3
@@ -419,21 +434,27 @@ tag Scalability
 			<.section>
 				<.content>
 					<h2>
-						<span.rainbow[fs: 80px fw: 800]> '100% '
+						<span.rainbow[fs: 120px lh: 140px fw: 800]> '100% '
 						<br>
 						'scalable blockchain'
-					<p> 'Existing approaches to blockchain scalability start and end with sharding, which in our view is almost impossible to implement with existing blockchain architectures. Our architecture will allow us to increase the performance of the blockchain with the advent of each new validator.'
+					<p> 'Existing approaches to blockchain scalability begin and end with sharding, which, in our view, is virtually unrealistic with existing blockchain architectures. Single Address Space, on the contrary, will allow blockchain performance to increase with each new validator.'
 			<.media>
 				<video src=chain autoplay muted loop poster='./images/scalability.webp'>
 
 tag Wallet
 	prop close-notify
 
+	def notify
+		close-notify = false
+		setTimeout(&, 1200) do
+			close-notify = true
+			imba.commit!
+
 	css .notify
 		zi: 100
 		pos: absolute
 		t: 0 l: 0
-		d: flex g: 24px ai: center
+		d: grid gtc: auto 1fr g: 24px ai: center
 		p: 20px
 		rd: 24px
 		bd: 1px solid rgba(255,255,255,.05)
@@ -445,6 +466,23 @@ tag Wallet
 		&.hidden
 			o: 0
 			transform: scale(0.85)
+		.btns
+			d: flex
+			g: 12px
+			gc: 1 / 3
+			button
+				cursor: pointer
+				fs: 11px lh: 12px fw: 600 tt: uppercase ls: .5px
+				c: rgba(255,255,255,.5)
+				ol: none
+				rd: 8px
+				p: 12px
+				w: 100%
+				bd: 1px solid rgba(255,255,255,.05)
+				bg: rgba(255,255,255,.1)
+				tween: ease 0.2s
+				&:hover
+					c: rgba(255,255,255,1)
 		.close
 			cursor: pointer
 			d: flex ai: center jc: center
@@ -480,11 +518,11 @@ tag Wallet
 
 
 	def render
-		<self[mt: -100px]>
+		<self>
 			<.section>
 				<.img-container>
 					<.notify.hidden=(close-notify == false)>
-						<.close @click=(do close-notify = false)>
+						<.close @click=(do notify!)>
 							<svg viewBox="0 0 10 10">
 								<line x1="1px" y1="1px" x2="9px" y2="9px">
 								<line x1="9px" y1="1px" x2="1px" y2="9px">
@@ -492,7 +530,10 @@ tag Wallet
 						<.msg>
 							<p> 'ATTENTION!'
 								<span> '5 sec ago'
-							<p> 'Your passphrase has been added on a new device.'
+							<p> 'New device is trying to use your seed phrase.'
+						<.btns>
+							<button @click=(do notify!)> 'Decline'
+							<button @click=(do notify!)> 'Allow'
 					<video loop autoplay muted poster='./images/wallet.webp'>
 						<source src=wallet type='video/webm; codecs="vp9, vorbis"'>
 				<.content>
@@ -500,7 +541,7 @@ tag Wallet
 						<br>
 						'of '
 						<span.rainbow> 'wallet security'
-					<p> "Wallets in modern blockchains resemble rooms with open doors, the security of which is provided only by a huge number of these doors. We are adding a new level of protection - a key, without which no one but you can open the door. Simply put, if your seed phrase is stolen from you, then no one will be able to use it without your confirmation."
+					<p> "Wallets in modern blockchains resemble rooms with open doors, and their security is provided only by an enormous number of these doors. We will add a new level of protection. In Elysium, if you occupy a room, it will be locked, and no one except you will be able to open the door. In other words, if somebody steals your seed phrase, he will not be able to use it without confirmation from your device."
 
 tag Contracts
 	css .section
@@ -560,12 +601,14 @@ tag Contracts
 		<self>
 			<.section>
 				<.content>
-					<h2> 'Simple and readable'
-						<.rainbow> 'smart contracts'
-					<p> 'Imperative languages ​​like Solidity used in current blockchains allow fraudsters to very cleverly create loopholes that are difficult to find even for professionals. We are developing a special DSL (Domain Specific Language) – a declarative language for smart contracts, which will not only be understandable to ordinary users (non-programmers), but will also allow them to easily and easily create their own.'
+					<h2> 'Readable '
+						<span.rainbow> 'smart contracts'
+						' and '
+						<span.rainbow> 'scam prevention'
+					<p> "We are developing a special DSL (Domain Specific Language) - a simple language for writing smart contracts. Ordinary users without coding skills will be able to understand other people's contracts and create their own in a visual builder. Full-fledged languages like Solidity used in current blockchains allow attackers to create loopholes that are difficult to find, even for professionals."
 					<em>
 						<Lightning>
-						<p> 'The readability and transparency of DSL will allow you to completely get away from most of the existing fraud schemes.'
+						<p> 'The readability and transparency of DSL will make impossible most of the existing fraud schemes.'
 				<code>
 					<.head>
 						<.btn>
@@ -627,12 +670,12 @@ tag Contracts
 							<span[c:#61B49F]> ' 120 Cash'
 							' from'
 							<span[c:#C17EC2]> ' Deposit'
-						for i in [0...7]
+						for i in [0...8]
 							<li> <br>
 
 tag Tokenomics
 	def render
-		<self>
+		<self[mt: -100px]>
 			<.section>
 				<.img-container>
 					<video loop autoplay muted poster='./images/coins.webp'>
@@ -642,14 +685,14 @@ tag Tokenomics
 						<br>
 						'of '
 						<span.rainbow> 'two tokens'
-					<p> 'There will be two system tokens on the Elysium network. The first (operational) token is an algorithmic stablecoin, the rate of which will be regulated by burning fees / emission as a reward to network participants. The second (investment) token will accumulate profit in itself with the active growth of the network.'
-					<Link icon=Medium url='https://link.medium.com/kpot7j5ZJub' first='Learn more about' second='Elysium Tokenomics'>
+					<p> 'There will be two system tokens on the Elysium network. The first (operational) token will be an algorithmic stablecoin tied to several fiat currencies. The second (investment) token will be highly deflationary, and there will be permanent demand for it.'
+					# <Link icon=Medium url='https://link.medium.com/kpot7j5ZJub' first='Learn more about' second='Elysium Tokenomics'>
 
 tag Outro
 	css .copyright
 		ta: center
 		p: 40px
-		fs: 16px fw: 500 o: .5
+		fs: 16px fw: 500 o: .5 lh: 24px
 	css .bg-container
 		d: flex fld: column
 		g: 48px @!640: 32px
@@ -674,12 +717,12 @@ tag Outro
 					<.grid>
 						<.content>
 							<h2> 'To be continued...'
-							<p> "And there will be something else really grandiose... But we will tell about it closer to the launch of the mainnet. Follow us on social networks so you don't miss anything."
+							<p> "And we have hidden something huge! But we'll tell you about it closer to the launch. Follow us on social networks so you don't miss anything."
 						<.socials>
 							<Link icon=Discord url='https://discord.gg/Ykp5mCXWZ3' first='Join us on Discord'>
 							<Link icon=Twitter url='https://twitter.com/elysium_chain' first='Follow us on Twitter'>
 							<Link icon=Medium url='https://medium.com/@heap.void' first='Read us on Medium'>
-			<.copyright> '© 2022. Elysium, true dezentralized blockchain.'
+			<.copyright> '© 2022. Elysium – dezentralized, scalable & secure blockchain.'
 
 tag Page
 	css self
@@ -690,16 +733,15 @@ tag Page
 		of: hidden
 
 	def render
-		br = <br>
 		<self>
 			<Intro>
-			<Quote first="We rethought the path that the crypto industry has traveled over 15 years and saw many aspects that can be fundamentally improved. But the main thing we are striving for is to return the lightness and spirit of pioneering to the crypto.">
+			<Quote first="We have rethought the path of the crypto industry over the past 13 years and see many areas for improvement. But the main thing we are trying to achieve is to bring back crypto's innovative spirit.">
 			<Consensus>
 			<Nodes>
 			<Scalability>
-			<Tokenomics>
-			<Contracts>
 			<Wallet>
+			<Contracts>
+			<Tokenomics>
 			<Outro>
 
 imba.mount <Page>
