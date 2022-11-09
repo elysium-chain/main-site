@@ -6,9 +6,7 @@
   "scripts": {
     "dev": "imba serve src/index.imba",
     "build": "imba build --esm --web --minify --no-sourcemap --production --bundle --base . src/index.html",
-    "deploy": "firebase deploy",
-    "build_deploy": "imba build --esm --web --minify --no-sourcemap --production --bundle --base . src/index.html && firebase deploy",
-    "buildprev": "imba build --minify --no-sourcemap src/index.html",
+    "deploy": "imba build --esm --web --minify --no-sourcemap --production --bundle --base . src/index.html && firebase deploy",
     "preview": "npx http-server dist",
     "help": "imba --help",
     "version": "imba --version"
