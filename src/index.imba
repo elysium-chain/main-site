@@ -1,19 +1,44 @@
 # import './fonts.css'
 import {Arrow, Discord, Twitter, Medium, Bracket, Lightning} from './icons.imba'
 // @ts-ignore
+import favicon from './images/logo.webp'
+// @ts-ignore
 import wallet from './images/wallet.webm'
+// @ts-ignore
+import wallet-poster from './images/wallet.webp'
 // @ts-ignore
 import intro from './images/intro-back.webm'
 // @ts-ignore
+import intro-poster from './images/intro-back.webp'
+// @ts-ignore
 import coins from './images/coins.webm'
+// @ts-ignore
+import coins-poster from './images/coins.webp'
 // @ts-ignore
 import dice from './images/dice.webm'
 // @ts-ignore
+import dice-poster from './images/dice.webp'
+// @ts-ignore
 import chain from './images/scalability.webm'
+// @ts-ignore
+import chain-poster from './images/scalability.webp'
+
+let discord-link = "https://discord.gg/elysiumchain"
+let twitter-link = "https://twitter.com/elysium_chain"
+let medium-link = "https://medium.com/@heap.void"
+
+let favicon-link = document.querySelector("link[rel~='icon']")
+if !favicon-link
+	let link = document.createElement("link")
+	link.type = "image/svg+xml"
+	link.rel="icon"
+	document.head.appendChild(link)
+	link.href = favicon.url
 
 css html
 	ff: 'Montserrat'
 	c: #fff
+	bg: #000
 	body
 		m: 0
 		bg: #000
@@ -102,9 +127,9 @@ css .img-container
 	# 	rd: 100%
 	# 	o: .05
 	video
-		zi:1
-		w: 100%
-		max-width: 500px
+		# zi: 1
+		pos: relative
+		w: 100% max-width: 500px
 		filter: brightness(1.2) saturate(1.2)
 
 tag Link
@@ -165,11 +190,13 @@ tag Quote
 	css blockquote
 		zi: 10
 		pos: relative
-		d: block
-		fs: 24px lh: 36px fw: 600 ta: center
 		p: 64px 104px m: 0
 		bg: linear-gradient(to right, rgba(255,255,255,.02) 0%, rgba(255,255,255,.02) 50%, rgba(255,255,255,.02) 100%), black # linear-gradient(to bottom, rgba(255,255,255,.01) 2px, transparent 2px),
 		bgs: 100% 4px
+		p
+			zi: 100 
+			pos: relative
+			fs: 24px lh: 36px fw: 600 ta: center o: 1
 		@!640
 			p: 80px 40px
 			ta: left
@@ -197,7 +224,7 @@ tag Quote
 				&:before
 					t: 0 b: 0 l: calc(100% - 150px) w: 300px
 				&:after
-					t: 0 b: 0 l: calc(100% - 25px) w: 1000px
+					t: 0 b: 0 l: calc(100% - 25px) w: 100px
 			&:before
 				content: ''
 				pos: absolute
@@ -210,9 +237,9 @@ tag Quote
 				content: ''
 				pos: absolute
 				rd: 100%
-				bg: #FFF
-				o: 1
-				mix-blend-mode: overlay
+				bg: #EF78B1
+				o: .1
+				# mix-blend-mode: overlay
 				filter: blur(40px)
 		.bracket
 			pos: absolute
@@ -251,9 +278,7 @@ tag Quote
 						<.lighting.right>
 						<.blur>
 						# <.shadow>
-						first
-						<br>
-						second
+						<p> first
 
 tag Intro
 	css self
@@ -281,6 +306,7 @@ tag Intro
 						min-width: 300px @!380: 300px
 						t: 48%
 					.slogan
+						zi: 100
 						w: 100%
 						d: flex jc: center
 						pos: relative
@@ -289,15 +315,15 @@ tag Intro
 							content: 'New world that shines'
 							pos: absolute
 							fs: 12px lh: 20px fw: 500 ls: 0.8em tt: uppercase ta: center
-							mix-blend-mode: soft-light
+							o: .2
 							filter: blur(1px)
 				.logo
 					pos: relative
 					s: 120px
 					img
 						w: 100%
-						mix-blend-mode: soft-light
 						object-fit: cover
+						o: 0.2
 						&:last-child
 							pos: absolute t: 0 l: 0
 							o: 0.65
@@ -313,13 +339,12 @@ tag Intro
 			<.media>
 				<.logo-name>
 					<.logo>
-						<img src='./images/logo.png'>
-						<img src='./images/logo.png'>
+						<img src='./images/logo.webp'>
+						<img src='./images/logo.webp'>
 					<.name>
 						<img src='./images/elysium.webp'>
 						<.slogan> 'New world that shines'
-				<video autoplay muted loop preload='none' poster='./images/intro-back.webp'>
-					<source src=intro type="video/webm">
+				<video src=intro autoplay muted loop preload="metadata" poster=intro-poster>
 			<.section>
 				<.content>
 					<h2[max-width: 800px as: center]> 
@@ -342,7 +367,7 @@ tag Consensus
 		<self>
 			<.section>
 				<.img-container>
-					<video src=dice autoplay muted loop poster='./images/Dice.webp'>
+					<video src=dice autoplay muted loop poster=dice-poster preload="metadata">
 				<.content>
 					<h2> 'Consensus '
 						<.rainbow> 'Proof of Victory'
@@ -439,7 +464,7 @@ tag Scalability
 						'scalable blockchain'
 					<p> 'Existing approaches to blockchain scalability begin and end with sharding, which, in our view, is virtually unrealistic with existing blockchain architectures. Single Address Space, on the contrary, will allow blockchain performance to increase with each new validator.'
 			<.media>
-				<video src=chain autoplay muted loop preload='none' poster='./images/scalability.webp'>
+				<video src=chain autoplay muted loop poster=chain-poster preload="metadata">
 
 tag Wallet
 	prop close-notify
@@ -449,9 +474,10 @@ tag Wallet
 		setTimeout(&, 1200) do
 			close-notify = true
 			imba.commit!
-
+	css .img-container
+		pt: 52px
 	css .notify
-		zi: 100
+		zi: 1000
 		pos: absolute
 		t: 0 l: 0
 		d: grid gtc: auto 1fr g: 24px ai: center
@@ -460,6 +486,7 @@ tag Wallet
 		bd: 1px solid rgba(255,255,255,.05)
 		bg: rgba(255,255,255,.05)
 		backdrop-filter: blur(10px)
+		-webkit-backdrop-filter: blur(10px)
 		o: 1
 		transform: scale(1)
 		tween: ease 0.2s
@@ -526,7 +553,7 @@ tag Wallet
 							<svg viewBox="0 0 10 10">
 								<line x1="1px" y1="1px" x2="9px" y2="9px">
 								<line x1="9px" y1="1px" x2="1px" y2="9px">
-						<img src='./images/social-logo.png'>
+						<img src='./images/logo-color.webp'>
 						<.msg>
 							<p> 'ATTENTION!'
 								<span> '5 sec ago'
@@ -534,8 +561,7 @@ tag Wallet
 						<.btns>
 							<button @click=(do notify!)> 'Decline'
 							<button @click=(do notify!)> 'Allow'
-					<video loop autoplay muted poster='./images/wallet.webp'>
-						<source src=wallet type='video/webm; codecs="vp9, vorbis"'>
+					<video src=wallet loop autoplay muted poster=wallet-poster preload="metadata">
 				<.content>
 					<h2> 'A new level '
 						<br>
@@ -579,7 +605,7 @@ tag Contracts
 					rd: 100%
 					bg: rgba(255, 255, 255, 0.05)
 			ol
-				of: scroll
+				of: auto
 				m: 0 p: 16px 40px 20px 58px
 				list-style-type: none
 				counter-reset: num
@@ -678,8 +704,7 @@ tag Tokenomics
 		<self[mt: -100px]>
 			<.section>
 				<.img-container>
-					<video loop autoplay muted poster='./images/coins.webp'>
-						<source src=coins type='video/webm; codecs="vp9, vorbis"'>
+					<video src=coins loop autoplay muted poster=coins-poster preload="metadata">
 				<.content>
 					<h2> 'Unique tokenomics'
 						<br>
@@ -719,10 +744,10 @@ tag Outro
 							<h2> 'To be continued...'
 							<p> "And we have hidden something huge! But we'll tell you about it closer to the launch. Follow us on social networks so you don't miss anything."
 						<.socials>
-							<Link icon=Discord url='https://discord.gg/Ykp5mCXWZ3' first='Join us on Discord'>
-							<Link icon=Twitter url='https://twitter.com/elysium_chain' first='Follow us on Twitter'>
-							<Link icon=Medium url='https://medium.com/@heap.void' first='Read us on Medium'>
-			<.copyright> '© 2022. Elysium – dezentralized, scalable & secure blockchain.'
+							<Link icon=Discord url=discord-link first='Join us on Discord'>
+							<Link icon=Twitter url=twitter-link first='Follow us on Twitter'>
+							<Link icon=Medium url=medium-link first='Read us on Medium'>
+			<.copyright> '© 2022. Elysium Team.'
 
 tag Page
 	css self
@@ -735,7 +760,7 @@ tag Page
 	def render
 		<self>
 			<Intro>
-			<Quote first="We have rethought the path of the crypto industry over the past 13 years and see many areas for improvement. But the main thing we are trying to achieve is to bring back crypto's innovative spirit.">
+			<Quote first="We have rethought the path the crypto industry has taken in 13 years and saw many areas for improvement. But our main goal is to bring back crypto's innovative spirit.">
 			<Consensus>
 			<Nodes>
 			<Scalability>
