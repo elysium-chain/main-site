@@ -1,4 +1,4 @@
-import './fonts.css'
+# import './fonts.css'
 import {Arrow, Discord, Twitter, Medium, Bracket, Lightning} from './icons.imba'
 // @ts-ignore
 import wallet from './images/wallet.webm'
@@ -318,7 +318,7 @@ tag Intro
 					<.name>
 						<img src='./images/elysium.webp'>
 						<.slogan> 'New world that shines'
-				<video autoplay muted loop poster='./images/intro-back.webp'>
+				<video autoplay muted loop preload='none' poster='./images/intro-back.webp'>
 					<source src=intro type="video/webm">
 			<.section>
 				<.content>
@@ -439,7 +439,7 @@ tag Scalability
 						'scalable blockchain'
 					<p> 'Existing approaches to blockchain scalability begin and end with sharding, which, in our view, is virtually unrealistic with existing blockchain architectures. Single Address Space, on the contrary, will allow blockchain performance to increase with each new validator.'
 			<.media>
-				<video src=chain autoplay muted loop poster='./images/scalability.webp'>
+				<video src=chain autoplay muted loop preload='none' poster='./images/scalability.webp'>
 
 tag Wallet
 	prop close-notify
@@ -564,7 +564,7 @@ tag Contracts
 			border-image: linear-gradient(to right top, #4E01FF, #FE039B) 1 1 1 1
 			of: hidden
 			pos: relative
-			ff: 'Anonymous' fs: 16px lh: 24px as: start ws: nowrap
+			ff: 'Anonymous Pro' fs: 16px lh: 24px as: start ws: nowrap
 			.head
 				pos: absolute
 				l: 0 r: 0 t: 0

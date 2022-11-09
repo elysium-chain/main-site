@@ -5,10 +5,13 @@
   "main": "src/index.imba",
   "scripts": {
     "dev": "imba serve src/index.imba",
-    "deploy": "imba build --esm --web --minify --no-sourcemap --production --bundle --base . src/index.html && firebase deploy",
-    "build": "imba build --esm --web --base . src/index.html",
+    "build": "imba build --esm --web --minify --no-sourcemap --production --bundle --base . src/index.html",
+    "deploy": "firebase deploy",
+    "build_deploy": "imba build --esm --web --minify --no-sourcemap --production --bundle --base . src/index.html && firebase deploy",
+    "buildprev": "imba build --minify --no-sourcemap src/index.html",
     "preview": "npx http-server dist",
-    "help": "imba build --help"
+    "help": "imba --help",
+    "version": "imba --version"
   },
   "repository": {
     "type": "git",
