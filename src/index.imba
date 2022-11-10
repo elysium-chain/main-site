@@ -351,7 +351,7 @@ tag Intro
 						<span.rainbow> "Elysium"
 						" is a "
 						<span.rainbow> "next-generation"
-						" blockchain with a many "
+						" blockchain with many "
 						<span.rainbow> "social"
 						" and "
 						<span.rainbow> "tech"
@@ -466,14 +466,22 @@ tag Scalability
 			<.media>
 				<video src=chain autoplay muted loop poster=chain-poster preload="metadata">
 
+let date = new Date!
+let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
 tag Wallet
 	prop close-notify
+	prop show-details = false
+
 
 	def notify
 		close-notify = false
 		setTimeout(&, 1200) do
 			close-notify = true
+			show-details = false
 			imba.commit!
+
 	css .img-container
 		pt: 52px
 	css .notify
@@ -493,23 +501,6 @@ tag Wallet
 		&.hidden
 			o: 0
 			transform: scale(0.85)
-		.btns
-			d: flex
-			g: 12px
-			gc: 1 / 3
-			button
-				cursor: pointer
-				fs: 11px lh: 12px fw: 600 tt: uppercase ls: .5px
-				c: rgba(255,255,255,.5)
-				ol: none
-				rd: 8px
-				p: 12px
-				w: 100%
-				bd: 1px solid rgba(255,255,255,.05)
-				bg: rgba(255,255,255,.1)
-				tween: ease 0.2s
-				&:hover
-					c: rgba(255,255,255,1)
 		.close
 			cursor: pointer
 			d: flex ai: center jc: center
@@ -533,16 +524,66 @@ tag Wallet
 		img
 			s: 64px rd: 12px
 		.msg
+			pos: relative
 			max-width: 240px
 			d: flex fld: column g: 4px
 			p
 				fs: 14px fw: 500 lh: 20px
 				&:first-child
 					fw: 700 o: 1
-					span
-						fs: 12px fw: 500 o: .5
-						float: right
-
+				&:last-child
+					cursor: pointer
+					pos: absolute r: -10px b: -10px
+					fs: 12px fw: 500 o: 0.5
+					p: 2px 16px
+					rd: 16px
+					bg: rgba(255,255,255,.1)
+					&:hover
+						o: .75
+					&.hide
+						o: 0
+						visibility: hidden
+						tween:  opacity ease 0.2s, visibility ease 0s .2s
+		.details
+			gc: 1 / 3
+			of: hidden
+			tween: ease 5s
+			h: 264px
+			animation: viewdetails ease-in .2s 
+			@keyframes viewdetails
+				from h: 0px o: 0
+			.message
+				d: flex fld: column g: 4px ai: center
+				p: 16px 0
+				rd: 12px
+				bg: rgba(255,255,255,.05)
+				bd: solid 1px rgba(255,255,255,.05)
+			.access-code
+				d: flex fld: column g: 4px ai: center
+				p: 24px 0 24px 0
+				ta: center
+				p
+					&:last-child
+						o: 1
+						fs: 20px lh: 32px
+			p
+				fs: 14px fw: 500 lh: 20px
+		.btns
+			d: flex
+			g: 12px
+			button
+				cursor: pointer
+				fs: 11px lh: 12px fw: 600 tt: uppercase ls: .5px
+				c: rgba(255,255,255,.5)
+				ol: none
+				rd: 8px
+				p: 12px
+				w: 100%
+				bd: 1px solid rgba(255,255,255,.05)
+				bg: rgba(255,255,255,.1)
+				tween: ease 0.2s
+				&:hover
+					c: rgba(255,255,255,1)
 
 	def render
 		<self>
@@ -556,11 +597,22 @@ tag Wallet
 						<img src='./images/logo-color.webp'>
 						<.msg>
 							<p> 'ATTENTION!'
-								<span> '5 sec ago'
-							<p> 'New device is trying to use your seed phrase.'
-						<.btns>
-							<button @click=(do notify!)> 'Decline'
-							<button @click=(do notify!)> 'Allow'
+							<p> 'New device is trying to use your seed phrase.'
+							<p.hide=(show-details == true) @click=(do show-details = true)> 'View details'
+						if show-details
+							<.details>
+								<.message>
+									<p> days[date.getDay!] + ', ' + months[date.getMonth!] + ' ' + date.getDate! + ', ' + date.getFullYear! + ', ' + date.toLocaleTimeString!
+									<p> 'Mac OS X, Chrome 106.0.0'
+									<p> '176.98.225.217'
+								<.access-code>
+									<p> 'Use your passkey'
+										<br>
+										'if you want to allow this device:'
+									<p> 'wif938rj2938'
+								<.btns>
+									<button @click=(do notify!)> 'Decline'
+									<button @click=(do notify!)> 'Allow'
 					<video src=wallet loop autoplay muted poster=wallet-poster preload="metadata">
 				<.content>
 					<h2> 'A new level '
