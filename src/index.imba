@@ -329,10 +329,11 @@ tag Intro
 					img
 						w: 100%
 						object-fit: cover
-						o: 0.2
+						o: 1
+						mix-blend-mode: overlay
 						&:last-child
 							pos: absolute t: 0 l: 0
-							o: 0.65
+							o: 0.8
 							mix-blend-mode: normal
 			.social
 				zi: 10
