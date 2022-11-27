@@ -45,4 +45,12 @@ export tag Lightning
 				<defs>
 					<linearGradient id="rainbow" x1="0" x2="100%" y1="100%" y2="0">
 						<stop stop-color="#4E01FF" offset="0%">
-						<stop stop-color="#FE039A" offset="100%"> 
+						<stop stop-color="#FE039A" offset="100%">
+
+export tag Error
+	def render
+		<self>
+			<svg viewBox="0 0 56 48" fill="url(#rainbow)">
+				<path d="M27 35L26 21H30L29 35H27Z">
+				<path d="M27 39V37H29V39H27Z">
+				<path d="M0 48L28 0L56 48H0ZM3.48206 46L28 3.9693L52.5179 46H3.48206Z">

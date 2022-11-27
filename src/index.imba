@@ -1,5 +1,5 @@
 # import './fonts.css'
-import {Arrow, Discord, Twitter, Medium, Bracket, Lightning} from './icons.imba'
+import {Arrow, Discord, Twitter, Medium, Bracket, Lightning, Error} from './icons.imba'
 // @ts-ignore
 import favicon from './images/logo.webp'
 // @ts-ignore
@@ -35,19 +35,25 @@ if !favicon-link
 	document.head.appendChild(link)
 	link.href = favicon.url
 
+let date = new Date!
+let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
 css html
 	ff: 'Montserrat'
-	c: #fff
-	bg: #000
+	c: #AD8EBB
+	bg: rgba(19, 6, 26, 1)
 	body
+		pos: relative
 		m: 0
-		bg: #000
+		bg: rgba(19, 6, 26, 1)
 		# bgi: url('./images/noise.webp')
 	h1
+		c: #fff
 		m: 0
 	h2
 		pos: relative
-		fs: 48px lh: 60px fw: 700
+		fs: 48px lh: 60px fw: 700 c: #fff
 		m: 0
 		@!640
 			fs: 32px lh: 44px
@@ -55,14 +61,47 @@ css html
 		pos: relative
 		fs: 32px lh: 40px
 		m: 0
+	h4
+		pos: relative
+		fs: 24px lh: 32px fw: 600
+		m: 0
 	p
 		fs: 20px fw: 500 lh: 32px
-		o: 0.5
 		m: 0
 		# @!640
 		# 	fs: 16px lh: 24px
 
+css button
+	zi: 10
+	cursor: pointer
+	ol: none
+	pos: absolute
+	d: flex ai: center as: center g: 12px
+	ff: 'Montserrat' fs: 11px lh: 20px fw: 600 c: #fff tt: uppercase ls: 0.1em
+	p: 16px 32px
+	bd: 1px
+	bs: solid
+	bc: rgba(255,255,255,.1)
+	# border-image: linear-gradient(264deg, #FE039A 1%, #4E01FF 98%) 1 1 1 1
+	bg: rgba(255,255,255,.05)
+	backdrop-filter: blur(10px)
+	-webkit-backdrop-filter: blur(10px)
+	>>> svg
+		s: 10px
+		fill: #fff
+	&:hover
+		&:before o: 1
+	&:before
+		o: 0
+		content: ''
+		pos: absolute l: 0 t: 0 b: 0 r: 0
+		bd: 1px
+		bs: solid
+		border-image: linear-gradient(264deg, #FE039A 1%, #4E01FF 98%) 1 1 1 1
+		tween: ease 0.2s
+
 css .section
+	# of: hidden
 	zi: 100
 	pos: relative
 	d: grid gtc: repeat(auto-fit, minmax(300px, 1fr))
@@ -84,21 +123,21 @@ css em
 	d: flex g: 40px ai: center
 	pt: 72px @!640: 48px
 	mt: 24px @!640: 16px
-	bdt: 1px solid rgba(255,255,255,.1)
+	bdt: 1px solid rgba(42, 16, 54, 1)
 	p
-		font-style: normal fs: 16px lh: 28px o: 1
+		font-style: normal fs: 16px lh: 28px c: #fff
 		max-width: 430px
 	>>> svg
 		h: 50px
-		# fill: rgba(255,255,255,.1)
+		fill: transparent
 		stroke-width: 2px
 
 css .rainbow
-		bg: linear-gradient(264deg, #FE039A 1%, #4E01FF 98%)
-		-webkit-background-clip: text
-		-webkit-text-fill-color: transparent
-		background-clip: text
-		text-fill-color: transparent
+	bg: linear-gradient(264deg, #FE039A 1%, #4E01FF 98%)
+	-webkit-background-clip: text
+	-webkit-text-fill-color: transparent
+	background-clip: text
+	text-fill-color: transparent
 
 css svg
 	d: block
@@ -107,25 +146,19 @@ css svg
 	m: 0
 	p: 0
 
+css .bg-container
+	d: flex fld: column
+	g: 48px @!640: 32px
+	p: 80px @!640: 40px
+	bw: 1px
+	bs: solid
+	border-image: linear-gradient(to right top, #4E01FF, #FE039B) 1 1 1 1
+	backdrop-filter: blur(10px)
+
 css .img-container
 	d: flex jc: center as: start
 	pos: relative
 	@!880 order: 1
-	# &:before
-	# 	content: ''
-	# 	pos: absolute l: -50px b: -50px
-	# 	s: 400px
-	# 	bg: #FE039A
-	# 	rd: 100%
-	# 	o: .05
-	# &:after
-	# 	content: ''
-	# 	pos: absolute r: 0 t: 0
-	# 	s: 200px
-	# 	bg: #4E01FF
-	# 	# bg: linear-gradient(-135deg, #FE039A 1%, #4E01FF 98%)
-	# 	rd: 100%
-	# 	o: .05
 	video
 		# zi: 1
 		pos: relative
@@ -196,7 +229,7 @@ tag Quote
 		p
 			zi: 100 
 			pos: relative
-			fs: 24px lh: 36px fw: 600 ta: center o: 1
+			fs: 24px lh: 36px fw: 600 ta: center c: #fff
 		@!640
 			p: 80px 40px
 			ta: left
@@ -277,13 +310,15 @@ tag Quote
 						<.lighting.left>
 						<.lighting.right>
 						<.blur>
-						# <.shadow>
+						<.shadow>
 						<p> first
 
 tag Intro
 	css self
 		d: flex fld: column ac: center
 		ta: center @!640: left
+		.section
+			d: block
 		.media
 			zi: 0
 			pos: relative
@@ -293,7 +328,7 @@ tag Intro
 				zi: 1
 				content: ''
 				pos: absolute l: 0 t: 0 r: 0 b: 0
-				bg: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 30%)
+				bg: linear-gradient(to top, rgba(19, 6, 26, 1) 0%, rgba(19, 6, 26, 0) 30%)
 			.logo-name
 				pos: absolute ai: center
 				d: flex fld: column jc: center g: 64px
@@ -328,12 +363,25 @@ tag Intro
 							pos: absolute t: 0 l: 0
 							o: 0.65
 							mix-blend-mode: normal
+			.social
+				zi: 10
+				pos: absolute
+				b: 13% l: 0 r: 0 m: auto
+				d: flex ai: center jc: center g: 40px
+				>>> svg
+					cursor: pointer
+					h: 24px
+					fill: #563167
+					tween: ease 0.2s
+					&:hover
+						fill: #fff
 			video
 				d: block
 				m: 0 p: 0
 				w: 100%
 				min-width: 1600px
 				object-fit: cover
+
 	def render
 		<self>
 			<.media>
@@ -344,6 +392,10 @@ tag Intro
 					<.name>
 						<img src='./images/elysium.webp'>
 						<.slogan> 'New world that shines'
+				<.social>
+					<Twitter @click=(do window.open('https://twitter.com/elysium_chain'))>
+					<Discord @click=(do window.open('https://discord.gg/elysiumchain'))>
+					<Medium @click=(do window.open('https://medium.com/@heap.void'))>
 				<video src=intro autoplay muted loop preload="metadata" poster=intro-poster>
 			<.section>
 				<.content>
@@ -359,10 +411,6 @@ tag Intro
 					<p[max-width: 800px as: center]> "Current blockchains, even those of the latest generation, do not bring much innovation. In many cases, they move away from the fundamental principles of the first breakthrough projects, such as Bitcoin and Ethereum."
 
 tag Consensus
-	css em
-		pos: -webkit-sticky
-		pos: sticky
-		t: 10px
 	def render
 		<self>
 			<.section>
@@ -377,22 +425,12 @@ tag Consensus
 						<p> 'The Proof of Victory consensus does not imply money investments to become a validator.'
 
 tag Nodes
-	css .bg-container
-		d: flex fld: column
-		g: 48px @!640: 32px
-		p: 80px @!640: 40px
-		# bg: linear-gradient(to top right, rgba(255,255,255,0), rgba(255,255,255,.05))
-		bw: 1px
-		bs: solid
-		border-image: linear-gradient(to right top, #4E01FF, #FE039B) 1 1 1 1
-		backdrop-filter: blur(10px)
+	css .grid
+		d: grid
+		gtc: repeat(auto-fit, minmax(240px, 1fr))
+		g: 64px 120px @!640: 40px
 
-		.grid
-			d: grid
-			gtc: repeat(auto-fit, minmax(240px, 1fr))
-			g: 64px 120px @!640: 40px
-
-		.node-list
+	css .node-list
 			mt: 15px
 			order: 3
 			d: grid
@@ -428,13 +466,14 @@ tag Scalability
 	css self
 		pos: relative
 		m: -200px 0
+		of: hidden
 		.section
 			pos: absolute
 			l: 0 r: 0 b: 0 t: 0 m: auto
-			ai: center
 			.content
 				# p: 0 80px
 				# pt: 34%
+				ai: center
 				max-width: calc(800px - 160px)
 				m: auto
 				# as: center
@@ -446,13 +485,14 @@ tag Scalability
 				zi: 1
 				content: ''
 				pos: absolute l: 0 t: 0 r: 0 b: 0
-				bg: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 30%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 30%) # url('./images/noise.webp'),
+				bg: linear-gradient(to top, rgba(19, 6, 26, 1) 0%, rgba(19, 6, 26, 0) 30%), linear-gradient(to bottom, rgba(19, 6, 26, 1) 0%, rgba(19, 6, 26, 0) 30%) # url('./images/noise.webp'),
 			video
 				pos: relative
 				w: 100%
 				min-width: 1200px
 				o: .3
 				filter: brightness(1.2) saturate(1.2)
+				mix-blend-mode: lighten
 
 	def render
 		<self>
@@ -465,10 +505,6 @@ tag Scalability
 					<p> 'Existing approaches to blockchain scalability begin and end with sharding, which, in our view, is virtually unrealistic with existing blockchain architectures. Single Address Space, on the contrary, will allow blockchain performance to increase with each new validator.'
 			<.media>
 				<video src=chain autoplay muted loop poster=chain-poster preload="metadata">
-
-let date = new Date!
-let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 tag Wallet
 	prop close-notify
@@ -495,7 +531,7 @@ tag Wallet
 		bg: rgba(255,255,255,.05)
 		backdrop-filter: blur(10px)
 		-webkit-backdrop-filter: blur(10px)
-		o: 1
+		c: #fff
 		transform: scale(1)
 		tween: ease 0.2s
 		&.hidden
@@ -509,15 +545,15 @@ tag Wallet
 			s: 24px
 			rd: 100%
 			bd: 1px solid rgba(255,255,255,.05)
-			bg: rgba(11,11,11,1)
-			bxs: 0 4px 12px 0 rgba(0,0,0,1)
+			bg: linear-gradient(to top, rgba(255, 255, 255, .05), rgba(255, 255, 255, 0.05)), rgba(19, 6, 26, 1)
+			bxs: 0 4px 12px 0 rgba(0,0,0,0.25)
 			&:hover
 				>>> svg
 					transform: rotateZ(90deg)
 					tween: ease 0.2s
 			>>> svg
 				s: 10px
-				stroke: rgba(55,55,55)
+				stroke: rgba(82, 56, 94, 1)
 				stroke-width: 2px
 				stroke-linecap: round
 				transform: rotateZ(0deg)
@@ -548,16 +584,17 @@ tag Wallet
 			gc: 1 / 3
 			of: hidden
 			tween: ease 5s
-			h: 264px
+			h: 147px
 			animation: viewdetails ease-in .2s 
 			@keyframes viewdetails
 				from h: 0px o: 0
 			.message
 				d: flex fld: column g: 4px ai: center
-				p: 16px 0
-				rd: 12px
-				bg: rgba(255,255,255,.05)
-				bd: solid 1px rgba(255,255,255,.05)
+				p: 20px 0
+				# rd: 12px
+				# bg: rgba(255,255,255,.05)
+				bdt: solid 1px rgba(255,255,255,.05)
+				# mb: 12px
 			.access-code
 				d: flex fld: column g: 4px ai: center
 				p: 24px 0 24px 0
@@ -603,13 +640,13 @@ tag Wallet
 							<.details>
 								<.message>
 									<p> days[date.getDay!] + ', ' + months[date.getMonth!] + ' ' + date.getDate! + ', ' + date.getFullYear! + ', ' + date.toLocaleTimeString!
-									<p> 'Mac OS X, Chrome 106.0.0'
+									<p> 'macOS Caesar 16.0, Chrome 106.0.0'
 									<p> '176.98.225.217'
-								<.access-code>
-									<p> 'Use your passkey'
-										<br>
-										'if you want to allow this device:'
-									<p> 'wif938rj2938'
+								# <.access-code>
+								# 	<p> 'Use your passkey'
+								# 		<br>
+								# 		'if you want to allow this device:'
+								# 	<p> 'wif938rj2938'
 								<.btns>
 									<button @click=(do notify!)> 'Decline'
 									<button @click=(do notify!)> 'Allow'
@@ -622,54 +659,107 @@ tag Wallet
 					<p> "Wallets in modern blockchains resemble rooms with open doors, and their security is provided only by an enormous number of these doors. We will add a new level of protection. In Elysium, if you occupy a room, it will be locked, and no one except you will be able to open the door. In other words, if somebody steals your seed phrase, he will not be able to use it without confirmation from your device."
 
 tag Contracts
+
+	prop close-editor
+	def editor
+		setTimeout(&, 200) do
+			close-editor = true
+			imba.commit!
+
 	css .section
-		jc: space-between
 		pos: relative
-		# &:before
-		# 	zi: -1
-		# 	content: ''
-		# 	pos: absolute
-		# 	l: -50px t: -50px r: -50px b: -50px
-		# 	rd: 16px
-		# 	bg: linear-gradient(249deg, #FE039A, #4E01FF)
-		# 	filter: blur(200px) o: 0.1
-		code
-			pt: 40px
-			# bg: rgba(255, 255, 255, 0.01)
-			# bd: 1px solid rgba(255, 255, 255, 0.04)
-			bw: 1px
-			bs: solid
-			border-image: linear-gradient(to right top, #4E01FF, #FE039B) 1 1 1 1
-			of: hidden
+		jc: space-between
+		ai: start
+		.window
 			pos: relative
-			ff: 'Anonymous Pro' fs: 16px lh: 24px as: start ws: nowrap
-			.head
-				pos: absolute
-				l: 0 r: 0 t: 0
-				d: flex
-				g: 6px
-				p: 12px
-				bw: 1px
-				bs: solid
-				border-image: linear-gradient(to right top, #4E01FF -50%, #FE039B 70%) 0 0 1 0
-				.btn
-					size: 12px
-					rd: 100%
-					bg: rgba(255, 255, 255, 0.05)
-			ol
-				of: auto
-				m: 0 p: 16px 40px 20px 58px
-				list-style-type: none
-				counter-reset: num
-				li
-					pos: relative
+			.error
+				zi: 100
+				pos: absolute l: 0 t: 0 r: 0
+				d: flex fld: column ai: center g: 24px
+				p: 60px 40px
+				bg: rgba(255, 255, 255, 0.01)
+				bd: 1px solid rgba(255, 255, 255, 0.04)
+				>>> svg
+					w: 56px h: 48px
+					fill-rule: evenodd
+				p
+					&:nth-of-type(1)
+						fs: 16px lh: 28px o: 1 ta: center
+				button
+					ol: none
+					bd: none
+					p: 12px 40px
+					fs: 12px lh: 20px ls: 0.05em fw: 600 tt: uppercase c: #fff
+					bg: linear-gradient(264deg, #FE039A, #4E01FF)
+			.editor
+				d: grid
+				gtc: 1fr ai: start jc: start g: 80px 16px
+				min-height: calc(100vh - 272px)
+				p: 56px 80px 80px 56px
+				of: hidden
+				bw: 1px bs: solid
+				border-image: linear-gradient(to right top, #4E01FF, #FE039B) 1 1 1 1
+				o: 1
+				transform: scale(1)
+				tween: ease 0.2s
+				&.hidden
+					o: 0
+					transform: scale(0.85)
+				.head
+					pos: absolute
+					l: 0 r: 0 t: 0
+					d: flex jc: space-between ai: center g: 6px
+					p: 6px 6px 6px 12px
+					bw: 1px
+					bs: solid
+					border-image: linear-gradient(to right top, #4E01FF -50%, #FE039B 70%) 0 0 1 0
+					.btns
+						d: flex g: 6px
+						p: 6px 0
+						.btn
+							size: 12px
+							rd: 100%
+							bg: rgba(255, 255, 255, 0.05)
+					.run
+						cursor: default
+						d: flex ai: center g: 6px
+						ff: 'Montserrat' fs: 10px fw: 600 lh: 23px tt: uppercase ls: 0.01em
+						c: rgba(255,255,255,.15)
+						p: 0 12px pt: 1px
+						bg: rgba(255,255,255,.05)
+						tween: ease 0.2s
+						>>> svg
+							of: visible
+							s: 6px 9px
+							fill: rgba(255,255,255,.15)
+							tween: ease 0.2s
+						&:hover
+							c: rgba(255,255,255,1)
+							>>> svg
+								fill: rgba(255,255,255,1)
+				.strokes
+					pos: absolute
+					l: 16px t: 56px
+					of: hidden
+					ol p: 0 o: 0.15 of: hidden
+				.content
+					js: end as: end
 					m: 0
-					&:before
-						pos: absolute
-						content: counter(num)
-						counter-increment: num
-						t: 0px r: 100% mr: 20px
-						o: 0.15
+				ol
+					of: auto
+					m: 0 p: 0
+					ff: 'Anonymous Pro' fs: 16px lh: 24px as: start ws: nowrap
+					list-style-type: none
+					counter-reset: num
+					li
+						pos: relative
+						m: 0
+						# &:before
+						# 	pos: absolute
+						# 	content: counter(num)
+						# 	counter-increment: num
+						# 	t: 0px r: 100% mr: 20px
+						# 	o: 0.15
 		.content
 			as: end
 			max-width: 600px
@@ -678,84 +768,104 @@ tag Contracts
 	def render
 		<self>
 			<.section>
-				<.content>
-					<h2> 'Readable '
-						<span.rainbow> 'smart contracts'
-						' and '
-						<span.rainbow> 'scam prevention'
-					<p> "We are developing a special DSL (Domain Specific Language) - a simple language for writing smart contracts. Ordinary users without coding skills will be able to understand other people's contracts and create their own in a visual builder. Full-fledged languages like Solidity used in current blockchains allow attackers to create loopholes that are difficult to find, even for professionals."
-					<em>
-						<Lightning>
-						<p> 'The readability and transparency of DSL will make impossible most of the existing fraud schemes.'
-				<code>
-					<.head>
-						<.btn>
-						<.btn>
-						<.btn>
-					<ol>
-						<li>
-							<span[c:#588AC5]> 'When'
-							<span[c:#C17EC2]> ' Contract'
-							<span[c:#D09273]> ' created'
-						<li>
-							<span[c:#588AC5]> 'Then'
-							<span[c:#D09273]> ' mint'
-							<span[c:#61B49F]> ' 3000 tokens'
-							<span> ' to'
-							<span[c:#C17EC2]> ' Owner'
-						<li><br>
-						<li>
-							<span[c:#588AC5]> 'When'
-							<span[c:#C17EC2]> ' User'
-							<span[c:#D09273]> ' sends'
-							<span[c:#61B49F]> ' 100 Cash'
-							' to'
-							<span[c:#C17EC2]> ' Deposit'
-						<li>
-							<span[c:#588AC5]> 'And'
-							<span[c:#C17EC2]> ' Date'
-							' < '
-							<span[c:#61B49F]> '03.04.2024'
-						<li>
-							<span[c:#588AC5]> 'Then'
-							<span[c:#D09273]> ' mint'
-							<span[c:#61B49F]> ' NFT(1,6)'
-							' to'
-							<span[c:#C17EC2]> ' User'
-						<li><br>
-						<li>
-							<span[c:#588AC5]> 'When'
-							<span[c:#C17EC2]> ' Contract'
-							<span[c:#D09273]> ' state changes'
-							' to'
-							<span[c:#C17EC2]> ' Fulfilled'
-						<li>
-							<span[c:#588AC5]> 'Then'
-							' for'
-							<span[c:#C17EC2]> ' each User'
-						<li>
-							<span[c:#588AC5]> 'Which'
-							<span[c:#D09273]> ' invested'
-							<span[c:#61B49F]> ' 100 tokens'
-						<li>
-							<span[c:#588AC5]> 'And which'
-							<span[c:#D09273]> ' state'
-							' is'
-							<span[c:#C17EC2]> ' Active'
-						<li>
-							<span[c:#588AC5]> 'Do'
-							<span[c:#D09273]> ' send'
-							<span[c:#61B49F]> ' 120 Cash'
-							' from'
-							<span[c:#C17EC2]> ' Deposit'
-						for i in [0...8]
-							<li> <br>
+				<.window>
+					# if close-editor == true
+					# 	<.error>
+					# 		<Error>
+					# 		<h4> 'App closing error'
+					# 		<p> "Pfl'iv tirqp. Tfexirklcrkzfej, pfl yrmv tfdgcvkvu kyzj hlvjk. Xf kf tivn0 reu ljv kyv tfuv nfiu kf tcrzd pfli ivnriu. Tfuv nfiu, rggcv."
+					# 		<button> 'Reopen app'
+					# 		<p> "We told our developer 17 times, you are not Julius Caesar, you cannot do several things at the same time, do not be distracted from work..."
+					# 		<p> "How can you deal with this now, maybe you can?"
+					<.editor>
+						<.head>
+							<.btns>
+								<.btn @click=(do editor!)>
+								<.btn>
+								<.btn>
+							# <.run>
+							# 	<svg viewBox="0 0 6 9">
+							# 		<path d="M 0 0 L 6 4.5 L 0 9">
+							# 	'Run'
+						<.strokes>
+							for i in [1...101]
+								<ol> i
+						<ol>
+							<li>
+								<span[c:#588AC5]> 'When'
+								<span[c:#C17EC2]> ' Contract'
+								<span[c:#D09273]> ' created'
+							<li>
+								<span[c:#588AC5]> 'Then'
+								<span[c:#D09273]> ' mint'
+								<span[c:#61B49F]> ' 3000 tokens'
+								<span> ' to'
+								<span[c:#C17EC2]> ' Owner'
+							<li><br>
+							<li>
+								<span[c:#588AC5]> 'When'
+								<span[c:#C17EC2]> ' User'
+								<span[c:#D09273]> ' sends'
+								<span[c:#61B49F]> ' 100 Cash'
+								' to'
+								<span[c:#C17EC2]> ' Deposit'
+							<li>
+								<span[c:#588AC5]> 'And'
+								<span[c:#C17EC2]> ' Date'
+								' < '
+								<span[c:#61B49F]> '03.04.2024'
+							<li>
+								<span[c:#588AC5]> 'Then'
+								<span[c:#D09273]> ' mint'
+								<span[c:#61B49F]> ' NFT(1,6)'
+								' to'
+								<span[c:#C17EC2]> ' User'
+							<li><br>
+							<li>
+								<span[c:#588AC5]> 'When'
+								<span[c:#C17EC2]> ' Contract'
+								<span[c:#D09273]> ' state changes'
+								' to'
+								<span[c:#C17EC2]> ' Fulfilled'
+							<li>
+								<span[c:#588AC5]> 'Then'
+								' for'
+								<span[c:#C17EC2]> ' each User'
+							<li>
+								<span[c:#588AC5]> 'Which'
+								<span[c:#D09273]> ' invested'
+								<span[c:#61B49F]> ' 100 tokens'
+							<li>
+								<span[c:#588AC5]> 'And which'
+								<span[c:#D09273]> ' state'
+								' is'
+								<span[c:#C17EC2]> ' Active'
+							<li>
+								<span[c:#588AC5]> 'Do'
+								<span[c:#D09273]> ' send'
+								<span[c:#61B49F]> ' 120 Cash'
+								' from'
+								<span[c:#C17EC2]> ' Deposit'
+						<.content>
+							<h2> 'Readable '
+								<span.rainbow> 'smart contracts'
+								' and '
+								<span.rainbow> 'scam prevention'
+							<p> "We are developing a special DSL (Domain Specific Language) - a simple language for writing smart contracts. Ordinary users without coding skills will be able to understand other people's contracts and create their own in a visual builder. Full-fledged languages like Solidity used in current blockchains allow attackers to create loopholes that are difficult to find, even for professionals."
+							<em>
+								<Lightning>
+								<p> 'The readability and transparency of DSL will make impossible most of the existing fraud schemes.'
 
 tag Tokenomics
 	def render
-		<self[mt: -100px]>
+		<self>
 			<.section>
 				<.img-container>
+					<button @click=(do window.open('https://tokenomics.elysium-chain.com'))>
+						<.hover-border>
+						<svg viewBox="0 0 12 12">
+							<path d="M1,0 L11,6 L1,12">
+						'Run Simulation'
 					<video src=coins loop autoplay muted poster=coins-poster preload="metadata">
 				<.content>
 					<h2> 'Unique tokenomics'
@@ -763,29 +873,20 @@ tag Tokenomics
 						'of '
 						<span.rainbow> 'two tokens'
 					<p> 'There will be two system tokens on the Elysium network. The first (operational) token will be an algorithmic stablecoin tied to several fiat currencies. The second (investment) token will be highly deflationary, and there will be permanent demand for it.'
-					# <Link icon=Medium url='https://link.medium.com/kpot7j5ZJub' first='Learn more about' second='Elysium Tokenomics'>
+					<Link icon=Medium url='https://medium.com/@heap.void/elysium-tokenomics-7abf9bec7207' first='Learn more about' second='Elysium Tokenomics'>
 
 tag Outro
 	css .copyright
 		ta: center
 		p: 40px
 		fs: 16px fw: 500 o: .5 lh: 24px
-	css .bg-container
-		d: flex fld: column
-		g: 48px @!640: 32px
-		p: 80px @!640: 40px
-		# bg: linear-gradient(to top right, rgba(255,255,255,0), rgba(255,255,255,.05))
-		bw: 1px
-		bs: solid
-		border-image: linear-gradient(to right top, #4E01FF, #FE039B) 1 1 1 1
-		backdrop-filter: blur(10px)
-		.grid
-			d: grid
-			gtc: repeat(auto-fit, minmax(240px, 1fr))
-			g: 64px 120px @!640: 40px
-			.socials
-				order: 3
-				d: flex fld: column g: 22px
+	css .grid
+		d: grid
+		gtc: repeat(auto-fit, minmax(240px, 1fr))
+		g: 64px 120px @!640: 40px
+		.socials
+			order: 3
+			d: flex fld: column g: 22px
 
 	def render
 		<self>
@@ -801,13 +902,34 @@ tag Outro
 							<Link icon=Medium url=medium-link first='Read us on Medium'>
 			<.copyright> '© 2022. Elysium Team.'
 
+tag Pioneer
+	css .grid
+		d: grid
+		gtc: 1fr auto
+		# gtc: repeat(auto-fit, minmax(240px, 1fr))
+		g: 64px 60px @!640: 40px
+		img
+			max-width: 560px
+			mr: -140px
+			mt: -160px
+			mb: -120px
+	<self>
+		<.section>
+			<.bg-container>
+				<.grid>
+					<.content>
+						<h2> 'Pioneer Program'
+						# <p> 'Elysium is a big project, and it will take at least a year to finish, so before the launch of the blockchain, we want to spread the word and build a strong community. To achieve this, we will start a Pioneers Program in Q1 2023'
+						<button> 'More about Pioneer Programm'
+					<img src='./images/key.webp'>
+
 tag Page
 	css self
+		pos: relative
 		m: auto
 		d: flex
 		fld: column
-		g: 200px @!640: 100px
-		of: hidden
+		g: 160px @!640: 100px
 
 	def render
 		<self>
@@ -819,6 +941,7 @@ tag Page
 			<Wallet>
 			<Contracts>
 			<Tokenomics>
+			# <Pioneer>
 			<Outro>
 
 imba.mount <Page>
