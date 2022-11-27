@@ -71,35 +71,6 @@ css html
 		# @!640
 		# 	fs: 16px lh: 24px
 
-css button
-	zi: 10
-	cursor: pointer
-	ol: none
-	pos: absolute
-	d: flex ai: center as: center g: 12px
-	ff: 'Montserrat' fs: 11px lh: 20px fw: 600 c: #fff tt: uppercase ls: 0.1em
-	p: 16px 32px
-	bd: 1px
-	bs: solid
-	bc: rgba(255,255,255,.1)
-	# border-image: linear-gradient(264deg, #FE039A 1%, #4E01FF 98%) 1 1 1 1
-	bg: rgba(255,255,255,.05)
-	backdrop-filter: blur(10px)
-	-webkit-backdrop-filter: blur(10px)
-	>>> svg
-		s: 10px
-		fill: #fff
-	&:hover
-		&:before o: 1
-	&:before
-		o: 0
-		content: ''
-		pos: absolute l: 0 t: 0 b: 0 r: 0
-		bd: 1px
-		bs: solid
-		border-image: linear-gradient(264deg, #FE039A 1%, #4E01FF 98%) 1 1 1 1
-		tween: ease 0.2s
-
 css .section
 	# of: hidden
 	zi: 100
@@ -857,6 +828,34 @@ tag Contracts
 								<p> 'The readability and transparency of DSL will make impossible most of the existing fraud schemes.'
 
 tag Tokenomics
+	css button
+		zi: 10
+		cursor: pointer
+		ol: none
+		pos: absolute
+		d: flex ai: center as: center g: 12px
+		ff: 'Montserrat' fs: 11px lh: 20px fw: 600 c: #fff tt: uppercase ls: 0.1em
+		p: 16px 32px
+		bd: 1px
+		bs: solid
+		bc: rgba(255,255,255,.1)
+		bg: rgba(255,255,255,.05)
+		backdrop-filter: blur(10px)
+		-webkit-backdrop-filter: blur(10px)
+		>>> svg
+			s: 10px
+			fill: #fff
+		&:hover
+			&:before o: 1
+		&:before
+			o: 0
+			content: ''
+			pos: absolute l: 0 t: 0 b: 0 r: 0
+			bd: 1px
+			bs: solid
+			border-image: linear-gradient(264deg, #FE039A 1%, #4E01FF 98%) 1 1 1 1
+			tween: ease 0.2s
+
 	def render
 		<self>
 			<.section>
